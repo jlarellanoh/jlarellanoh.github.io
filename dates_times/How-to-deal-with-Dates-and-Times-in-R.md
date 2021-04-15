@@ -1,11 +1,14 @@
 How to deal with Dates and Times in R
 ================
-Juan Lorenzo Arellano (@jlarellanoh)
-2021-04-15
+Juan Lorenzo Arellano (Twitter: @jlarellanoh)
+2021-04-16
 
 -   [Introduction](#introduction)
     -   [How to parse a Character String into a
         Date](#how-to-parse-a-character-string-into-a-date)
+        -   [Default date format](#default-date-format)
+        -   [Customized date format](#customized-date-format)
+    -   [How to extract parts of Dates](#how-to-extract-parts-of-dates)
 
 # Introduction
 
@@ -35,27 +38,80 @@ new kid on the block: [**clock**](https://clock.r-lib.org/)
 
 ## How to parse a Character String into a Date
 
+### Default date format
+
 A date is data type or class that exists within R. When you need to
 write a date into a report, document, csv, etc. you covert into a
 string. Also, to enter a date into the R terminal you produce a string
 that has to be converted into an R date type.
 
 ``` r
-mydate_chr <- "2021-04-15"
-class(mydate_chr)
+mydate_chr <- "2021-04-15"     # we create a date as string
+class(mydate_chr)              # it's class is character
+[1] "character"
+
+mydate_date <- as.Date(mydate_chr)  # we convert it into a date with default format yyyy-mm-dd 
+mydate_date                         
+[1] "2021-04-15"
+
+class(mydate_date)             # it's class is Date
+[1] "Date"
 ```
 
-    ## [1] "character"
+Ok, we’ve cast a string into a Date with default format, but what is the
+default format?. As per the documentation `?as.Date`, if we do not
+indicate any format then the parameter *tryFormats* comes into play,
+whose default value is *c(“%Y-%m-%d”, “%Y/%m/%d”)*. Let’s test it!!
 
 ``` r
-mydate_date <- as.Date(mydate_chr)  # we do not need to specify any format as yyyy-mm-dd is a default
-mydate_date
+mydates <- c("2021/04/01", "2021/04/02", "2021-04-03", "2021.04.04")  # Format with slashes wins "/"
+as.Date(mydates)
+[1] "2021-04-01" "2021-04-02" NA           NA 
+
+mydates <- c("2021-04-01", "2021/04/02", "2021-04-03", "2021.04.04")  # Format with dashes wins "-"
+as.Date(mydates)
+[1] "2021-04-01" NA           "2021-04-03" NA  
 ```
 
-    ## [1] "2021-04-15"
+What’s happened here? `format` tries all the patterns in `tryFormats`
+and we it finds one that works then it keeps using that one discarding
+the others. So I’ve changed only the format of the first date and it
+lead the behavior of `as.Date()`.
+
+### Customized date format
+
+What if the default format is not convinient for us. Then we use the
+`format` argument of `as.Date()`
 
 ``` r
-class(mydate_date)
+mydates <- c("01/01/2021", "02/02/2021")  # Changed to dd/mm/yyyy
+as.Date(mydates, format = "%d/%m/%Y")     # Works: [1] "2021-01-01" "2021-02-02"
+
+mydates <- c("01/JAN/21", "02/JAN/21")    # Format with slashes wins "/"
+as.Date(mydates, format = "%d/%b/%y")     # Works: [1] "2021-01-01" "2021-01-02"
+
+mydates <- c("Thu, 15 of April, 2021")          # Format with slashes wins "/"
+as.Date(mydates, format = "%a, %d of %B, %Y")   # Works: [1] "2021-04-15"
 ```
 
-    ## [1] "Date"
+There are plenty of *conversion specifications* that you can query on
+the documention of `strptime()` or
+[here](https://rdrr.io/r/base/strptime.html).
+
+## How to extract parts of Dates
+
+Here we can use the function `format()`. Let say, we want to know the
+week number of my birthday, we can do:
+
+``` r
+juan_bh <- as.Date("1979/02/21")
+format(juan_bh, format = "Week was %V")    # [1] "Week was 08"
+```
+
+We can also check other date elements, like:
+
+``` r
+format(juan_bh, format = "That day it was %A (%a)")        # [1] "That day it was Wednesday (Wed)"
+format(juan_bh, format = "It was the day %u of the week")  # [1] "It was the day 3rd of the week 08"
+format(juan_bh, format = "It was %Cth century")            # [1] "It was 19th century"
+```
