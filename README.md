@@ -1,2 +1,4 @@
 # jlarellanoh.github.io
-readme
+
+* [How to deal with Dates and Times in R](dates_times/How-to-deal-with-Dates-and-Times-in-R.md)
+
