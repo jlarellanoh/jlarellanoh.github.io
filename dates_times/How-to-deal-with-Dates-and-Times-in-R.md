@@ -1,39 +1,61 @@
 How to deal with Dates and Times in R
 ================
-Juan Lorenzo Arellano
+Juan Lorenzo Arellano (@jlarellanoh)
 2021-04-15
 
--   [GitHub Documents](#github-documents)
--   [Including Code](#including-code)
--   [Including Plots](#including-plots)
+-   [Introduction](#introduction)
+    -   [How to parse a Character String into a
+        Date](#how-to-parse-a-character-string-into-a-date)
 
-## GitHub Documents
+# Introduction
 
-This is an R Markdown format used for publishing markdown documents to
-GitHub. When you click the **Knit** button all R code chunks are run and
-a markdown file (.md) suitable for publishing to GitHub is generated.
+A common need that exists in every programming language is parsing
+strings into dates and converting dates into string. This is
+specifically important for data analysts because we get data from many
+different sources and countries where the format changes, and we need to
+read that data into a R as dates. For instance, 31st of January of 2021
+can be seen as:
 
-## Including Code
+-   **01/31/21**: US format
+-   **January the 31, 2021**: US format
+-   **31/01/21**: typically European format
+-   **31.01.21**: typically German format
+-   **31-01-21**: typically English format
+-   **31/JAN/21**: variation of English format
+-   **31 January 2021**: variation of English format
 
-You can include R code in the document as follows:
+Conversely, in many occasions we to extract specific parts of the date
+like day of week, calendar week, month name, day name, etc. or produce a
+long string containing date parts like “Today is Monday of week 23
+(2021)” when creating reports or dashboards.
+
+We are going to see how we can do this transformations in **base R** (we
+will not cover [**lubridate**](https://lubridate.tidyverse.org/) nor the
+new kid on the block: [**clock**](https://clock.r-lib.org/)
+
+## How to parse a Character String into a Date
+
+A date is data type or class that exists within R. When you need to
+write a date into a report, document, csv, etc. you covert into a
+string. Also, to enter a date into the R terminal you produce a string
+that has to be converted into an R date type.
 
 ``` r
-summary(cars)
+mydate_chr <- "2021-04-15"
+class(mydate_chr)
 ```
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+    ## [1] "character"
 
-## Including Plots
+``` r
+mydate_date <- as.Date(mydate_chr)  # we do not need to specify any format as yyyy-mm-dd is a default
+mydate_date
+```
 
-You can also embed plots, for example:
+    ## [1] "2021-04-15"
 
-![](How-to-deal-with-Dates-and-Times-in-R_files/figure-gfm/pressure-1.png)<!-- -->
+``` r
+class(mydate_date)
+```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
+    ## [1] "Date"
