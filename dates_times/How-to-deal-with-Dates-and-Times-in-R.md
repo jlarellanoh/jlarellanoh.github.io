@@ -241,5 +241,5 @@ recipe.
 
 I’d be very happy to hear from your. You can get in touch with me on:
 
--   Twitter: @jlarellanoh
+-   Twitter: [@jlarellanoh](https://twitter.com/jlarellanoh)
 -   Email: <r.data.science.101@gmail.com>
