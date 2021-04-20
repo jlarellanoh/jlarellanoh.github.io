@@ -12,4 +12,5 @@ You can contact me via:
 ## List of recipes
 
 1. [How to deal with Dates and Times in R](dates_times/How-to-deal-with-Dates-and-Times-in-R.md)
+1. [How to add and subtract with Dates and Times in R](dates_times/How-to-add-and-subtract-Dates-and-Times-in-R.md)
 
