@@ -220,6 +220,21 @@ As can you see, %C doesn’t calculate the century correctly. It’s define
 in the documentation as “Century (00–99): the integer part of the year
 divided by 100.”. I warned you!
 
+Additionally, there are a set of methods to assist on this matter,
+namely:
+
+``` r
+weekdays(Joe_bday)                      # [1] "Friday"
+weekdays(Joe_bday, abbreviate = T)      # [1] "Fri"
+
+months(Joe_bday)                        # [1] "March"
+months(Joe_bday, abbreviate = T)        # [1] "Mar"
+
+quarters(Joe_bday)                      # [1] "Q1" 
+
+julian(Joe_bday)                        # [1] "1970-01-01"  (number of days since 1970-01-01)
+```
+
 ## How to extract parts of Times
 
 If you’ve reached this point, it’s going to be a piece of cake for you:
