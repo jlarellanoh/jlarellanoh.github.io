@@ -220,7 +220,7 @@ As can you see, %C doesn’t calculate the century correctly. It’s define
 in the documentation as “Century (00–99): the integer part of the year
 divided by 100.”. I warned you!
 
-Additionally, there are a set of methods to assist on this matter,
+Additionally, there is a set of methods to assist on this matter,
 namely:
 
 ``` r

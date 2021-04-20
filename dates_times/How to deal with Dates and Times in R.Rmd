@@ -179,7 +179,7 @@ format(Joe_bday, format = "It was %Cth century")            # [1] "It was 19th c
 As can you see, %C doesn't calculate the century correctly. It's define in the documentation as "Century (00–99): the integer part of the year divided by 100.". I warned you!
 
 
-Additionally, there are a set of methods to assist on this matter, namely:
+Additionally, there is a set of methods to assist on this matter, namely:
 
 ```{r eval=F}
 weekdays(Joe_bday)                      # [1] "Friday"
