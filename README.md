@@ -6,7 +6,7 @@ My intention is to upload recipes when time permits and without any fixed schedu
 
 You can contact me via:
 
-* Twitter: [\@jlarellanoh](https://twitter.com/jlarellanoh)
+* Twitter: [@jlarellanoh](https://twitter.com/jlarellanoh)
 * Email: r.data.science.101@gmail.com
 
 ## List of recipes
