@@ -1,9 +1,11 @@
 How to deal with Dates and Times in R
 ================
 Juan Lorenzo Arellano
-2021-04-16
+2021-04-20
 
 -   [Introduction](#introduction)
+    -   [How to get current Date and
+        Time](#how-to-get-current-date-and-time)
     -   [How to parse a Character String into a
         Date](#how-to-parse-a-character-string-into-a-date)
         -   [Default date format](#default-date-format)
@@ -41,6 +43,40 @@ in **base R** (we will not cover
 [**lubridate**](https://lubridate.tidyverse.org/) nor the new kid on the
 block: [**clock**](https://clock.r-lib.org/)
 
+## How to get current Date and Time
+
+Base R comes with 2 main functions to report current data and time:
+
+``` r
+Sys.Date()          # [1] "2021-04-20"
+Sys.time()          # [1] "2021-04-20 10:44:18 CEST"
+
+class(Sys.Date())   # [1] "Date"
+class(Sys.time())   # [1] "POSIXct" "POSIXt" 
+```
+
+Notice the inconsistency in the case: `Date()` starts with uppercase
+while `time()` starts with lowercase.
+
+`Sys.Date()` returns and object of the class `Date` with the current
+date in the current time zone. `Sys.time()` returns and object of class
+`POSIXct`. They can be formatted following below instructions. Both
+classes store the number of seconds since 01/01/1970, so their
+underlying data type is numeric (it’s a simple signed number). `POSIXct`
+has more precision as it stores hours, minutes seconds and timezones:
+
+``` r
+t <- Sys.time()    
+typeof(t)         # [1] "double"
+
+d <- Sys.Date()    
+typeof(d)         # [1] "double"
+```
+
+But, there is another data type or class for datetimes: `POSIXlt`. This
+class creates a named list with all the date and time components like
+day, minutes, seconds… etc. We’ll see this class a bit later.
+
 ## How to parse a Character String into a Date
 
 ### Default date format
@@ -51,8 +87,8 @@ string. Also, to enter a date into the R terminal you produce a string
 that has to be converted into an R date type.
 
 ``` r
-mydate_chr <- "2021-04-15"     # we create a date as string
-class(mydate_chr)              # [1] "character"
+mydate_chr <- "2021-04-15"          # we create a date as string
+class(mydate_chr)                   # [1] "character"
 
 mydate_date <- as.Date(mydate_chr)  # we convert it into a date with default format yyyy-mm-dd 
 class(mydate_date)                  # [1] "Date"
@@ -111,29 +147,6 @@ the documentation of `strptime()` or
 
 ### Adding time and timezones
 
-Dates are stored with the class `Data` while datetimes are stored with
-class `POSIXct`:
-
-``` r
-Sys.Date()          # [1] "2021-04-16"
-class(Sys.Date())   # [1] "Date"
-
-Sys.time()          # [1] "2021-04-16" 00:30:23 CEST
-class(Sys.time())   # [1] "POSIXct" "POSIXt" 
-```
-
-Both classes store the number of seconds since 01/01/1970, so their
-underlying data type is numeric (it’s a simple signed number). `POSIXct`
-has more precision as it stores hours, minutes seconds and timezones:
-
-``` r
-x <- Sys.time()    
-typeof(x)         # [1] "double"
-
-x <- Sys.Date()    
-typeof(x)         # [1] "double"
-```
-
 In order to parse a datetime string, we need the function `strptime()`:
 
 ``` r
@@ -152,6 +165,36 @@ strptime("2021-02-15 12:05:59 PM +0350"
 strptime("2021-02-15 12:05:59 PM -0600"
          , format = "%Y-%m-%d %I:%M:%S %p %z")  # %z = timezone
 ```
+
+As we said at the beginning, there is a class called `POSIXlt` that
+stores a date and time in a name list. See below"
+
+``` r
+x <- strptime("2021-02-15 12:05:59"
+              , format = "%Y-%m-%d %H:%M:%S")
+class(x)     # [1] "POSIXlt" "POSIXt"
+typeof(x)    # list
+```
+
+As we see, `strptime()` constructs a `POSIXlt` object. We can extract
+its components individually:
+
+``` r
+x$sec     # 59
+x$min     # 5
+x$hour    # 12
+x$mday    # 15
+x$mon     # 1   (it goes from 0 to 11: do 1+x$mon)
+x$year    # 121 (years from 1900: do 1900+x$year)
+x$wday    # 1   (day of week 0-6 -Sun to Sat-)
+x$yday    # 45  (day of year 0-364 -or 365 in a leap year-)
+x$isdst   # 0   (daylight savings: 0 not in place)
+x$zone    # CET (Central European Time)
+x$gmtoff  # The offset in seconds from GMT. NA is unknown
+```
+
+A `POSIXlt` it’s a bit more complex class than a `POSIXct` but it stores
+time in a human-like way.
 
 ## How to convert Dates into Strings
 
@@ -191,12 +234,12 @@ format(Joe_bday, format = "Second: %S")            # [1] "Second: 21"
 format(Joe_bday, format = "Timezone: %z")          # [1] "Timezone: +0600"
 ```
 
-And that’s all! I’ve you read up to here, you’ll feel much confortable
+And that’s all! I’ve you read up to here, you’ll feel much comfortable
 dealing with dates and times in R. We haven’t covert how to operate with
-them (addition and substraction of 2 dates). This will be another R
+them (addition and subtraction of 2 dates). This will be another R
 recipe.
 
 I’d be very happy to hear from your. You can get in touch with me on:
 
 -   Twitter: @jlarellanoh
--   Email:
+-   Email: <r.data.science.101@gmail.com>
