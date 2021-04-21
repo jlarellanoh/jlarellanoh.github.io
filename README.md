@@ -7,7 +7,7 @@ My intention is to upload content when time permits and without any fixed schedu
 You can contact me via:
 
 * Twitter: [@jlarellanoh](https://twitter.com/jlarellanoh)
-* Email: r.data.science.101@gmail.com
+* Email: [r.data.science.101@gmail.com](mailto:r.data.science.101@gmail.com)
 
 ## Bibliography
 
