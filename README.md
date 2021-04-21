@@ -13,9 +13,9 @@ You can contact me via:
 
 I've started my journey in Data Science by reading the following books and content:
 
-* Wickham and Grolemund. 2017. *R for Data Science*. https://r4ds.had.co.nz
-* Wickham. *Advanced R*. https://adv-r.hadley.nz
-* Rafael A. Irizarry. *Introduction to Data Science*. https://rafalab.github.io/dsbook
+* Wickham and Grolemund. 2017. *R for Data Science*. [https://r4ds.had.co.nz](https://r4ds.had.co.nz)
+* Wickham. *Advanced R*. [https://adv-r.hadley.nz](https://adv-r.hadley.nz)
+* Rafael A. Irizarry. *Introduction to Data Science*. [https://rafalab.github.io/dsbook](https://rafalab.github.io/dsbook)
 * Spiegelhalter. 2020. *The Art of Statistics*. Learning from Data. A Pelican Group.
 * Dyke. 2020. *Effective Data Storytelling*. Wiley.
 
