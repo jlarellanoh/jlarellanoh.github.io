@@ -1,7 +1,7 @@
 How to deal with Dates and Times in R
 ================
 Juan Lorenzo Arellano
-2021-04-20
+2021-04-21
 
 -   [Introduction](#introduction)
     -   [How to get current Date and
@@ -19,7 +19,7 @@ Juan Lorenzo Arellano
 # Introduction
 
 A common need that exists in most of the programming languages is
-parsing strings into dates and converting dates into string. Mastering
+parsing strings into dates and converting dates into strings. Mastering
 this process is of vital importance for data analysts/data scientist
 because we get data from many different sources and countries where
 format changes, and for dates this is typically a headache. For
@@ -33,10 +33,10 @@ instance, “31st of January of 2021” can be written as:
 -   **31/JAN/21**: variation of English format
 -   **31 January 2021**: variation of English format
 
-Conversely, in many occasions we to extract specific parts of the date
-like day of week, calendar week, month name, day name, etc. or we
-produce a long string containing date parts embedded with text like in
-this example “today is Monday of week 23 (2021)”.
+Conversely, in many occasions we have to extract specific parts of the
+date like day of week, calendar week, month name, day name, etc. or we
+need to produce a long string containing date parts embedded with text
+like in this example “today is Monday of week 23 (2021)”.
 
 In this recipe we are going to learn how we can do this transformations
 in **base R** (we will not cover
@@ -82,8 +82,8 @@ day, minutes, seconds… etc. We’ll see this class a bit later.
 ### Default date format
 
 A date is a data type or class that exists within R. When you need to
-write a date into a report, document, csv, etc. you covert into a
-string. Also, to enter a date into the R terminal you produce a string
+write a date into a report, document, csv file, etc. you convert it into
+a string. Also, to enter a date into the R terminal you produce a string
 that has to be converted into an R date type.
 
 ``` r
@@ -106,28 +106,29 @@ as.Date("2021.04.01")    # Error: character string is not in a standard unambigu
 as.Date("2021 04 01")    # Error: character string is not in a standard unambiguous format
 ```
 
-We’ve just seen how the two default formats work but not the other two,
+We’ve just seen that the two default formats work but not the other two,
 as expected. We’ll try with a character vector as input with multiple
 formats:
 
 ``` r
 # First attempt
-mydates <- c("2021/04/01", "2021/04/02", "2021-04-03", "2021.04.04")  # Format with slashes wins "/"
+mydates <- c("2021/04/01", "2021/04/02", "2021-04-03", "2021.04.04")  # Format with slashes "/" wins
 as.Date(mydates)           # [1] "2021-04-01" "2021-04-02" NA           NA 
 
 # Second attempt
-mydates <- c("2021-04-01", "2021/04/02", "2021-04-03", "2021.04.04")  # Format with dashes wins "-"
+mydates <- c("2021-04-01", "2021/04/02", "2021-04-03", "2021.04.04")  # Format with dashes "-" wins
 as.Date(mydates)           # [1] "2021-04-01" NA           "2021-04-03" NA  
 ```
 
 What’s happened here? `format()` tries all the patterns in `tryFormats`
-with the 1st element on the vector and when finds one that works then
-uses it for the rest. Notice that in the second attempt I’ve only
-changed the first date and it changed the behavior of `as.Date()`.
+with the 1st element of the vector and when it finds one that works then
+uses this for the rest of the elements. Notice that in the second
+attempt I’ve only changed the first date and it changed the behavior of
+`as.Date()`.
 
 ### Customized date format
 
-What if the default format is not convenient for us. Then we use the
+What if the default format is not convenient for us. Then, we use the
 `format` argument of the function `as.Date()`
 
 ``` r
@@ -216,9 +217,9 @@ format(Joe_bday, format = "It was the day %u of the week")  # [1] "It was the da
 format(Joe_bday, format = "It was %Cth century")            # [1] "It was 19th century (really ??)"
 ```
 
-As can you see, %C doesn’t calculate the century correctly. It’s define
+As can you see, %C doesn’t calculate the century correctly. It’s defined
 in the documentation as “Century (00–99): the integer part of the year
-divided by 100.”. I warned you!
+divided by 100”. So you must add 1. I warned you!
 
 Additionally, there is a set of methods to assist on this matter,
 namely:
@@ -237,7 +238,8 @@ julian(Joe_bday)                        # [1] "1970-01-01"  (number of days sinc
 
 ## How to extract parts of Times
 
-If you’ve reached this point, it’s going to be a piece of cake for you:
+If you’ve reached this point, the rest it’s going to be a piece of cake
+for you:
 
 ``` r
 Joe_bday <- strptime("1975-03-28 06:01:21 PM +0600"
@@ -249,10 +251,10 @@ format(Joe_bday, format = "Second: %S")            # [1] "Second: 21"
 format(Joe_bday, format = "Timezone: %z")          # [1] "Timezone: +0600"
 ```
 
-And that’s all! I’ve you read up to here, you’ll feel much comfortable
-dealing with dates and times in R. We haven’t covert how to operate with
-them (addition and subtraction of 2 dates). This will be another R
-recipe.
+And that’s all! If you’ve read up to here, you’ll feel much more
+comfortable dealing with dates and times in R. We haven’t seen how to
+operate with them (addition and subtraction of 2 dates). [This will be
+another R recipe](How-to-add-and-subtract-Dates-and-Times-in-R.md).
 
 I’d be very happy to hear from your. You can get in touch with me on:
 
