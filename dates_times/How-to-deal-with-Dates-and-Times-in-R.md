@@ -1,7 +1,7 @@
 How to deal with Dates and Times in R
 ================
 Juan Lorenzo Arellano
-2021-04-21
+2021-04-21 13:15:50
 
 -   [Introduction](#introduction)
     -   [How to get current Date and
@@ -254,7 +254,7 @@ format(Joe_bday, format = "Timezone: %z")          # [1] "Timezone: +0600"
 And that’s all! If you’ve read up to here, you’ll feel much more
 comfortable dealing with dates and times in R. We haven’t seen how to
 operate with them (addition and subtraction of 2 dates). [This will be
-another R recipe](How-to-add-and-subtract-Dates-and-Times-in-R.md).
+another R recipe](How-to-add-and-subtract-Dates-and-Times-in-R.html).
 
 I’d be very happy to hear from your. You can get in touch with me on:
 

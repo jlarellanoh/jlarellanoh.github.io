@@ -1,7 +1,7 @@
 ---
 title: "How to add and subtract Dates and Times in R"
 author: "Juan Lorenzo Arellano"
-date: "`r Sys.Date()`"
+date: "`r Sys.time()`"
 output:
   github_document:
     toc: true

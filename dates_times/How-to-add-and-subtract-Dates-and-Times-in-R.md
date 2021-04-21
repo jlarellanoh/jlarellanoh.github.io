@@ -1,7 +1,7 @@
 How to add and subtract Dates and Times in R
 ================
 Juan Lorenzo Arellano
-2021-04-21
+2021-04-21 13:15:53
 
 -   [Introduction](#introduction)
     -   [Addition of a scalar to a
@@ -15,10 +15,10 @@ Juan Lorenzo Arellano
 # Introduction
 
 Following the R recipe [How to deal with Date and Time in
-R](dates_times/How-to-deal-with-Dates-and-Times-in-R.html) where we
-reviewed the base R capabilities to deal with dates and times, we
-continue exploring how to add and subtract dates and times, also in base
-R. I plan to cover [**lubridate**](https://lubridate.tidyverse.org/) and
+R](How-to-deal-with-Dates-and-Times-in-R.html) where we reviewed the
+base R capabilities to deal with dates and times, we continue exploring
+how to add and subtract dates and times, also in base R. I plan to cover
+[**lubridate**](https://lubridate.tidyverse.org/) and
 [**clock**](https://clock.r-lib.org/) packages in the future.
 
 ## Addition of a scalar to a date
