@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <title>How to add and subtract Dates and Times in R &middot; R Data Science 101</title>
+
+    
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://localhost::4321/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://localhost::4321/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://localhost::4321/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet" type="text/css">
+
+  
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/androidstudio.min.css">
+  <script async src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
+  
+  <script async src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://localhost::4321/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://localhost::4321/css/my.css">
+    
+  
+  
+    
+        <script src="https://localhost::4321/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://localhost::4321/">R Data Science</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://localhost::4321/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://localhost::4321/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://localhost::4321/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/jlarellanoh" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/jlarellanoh" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2016. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>How to add and subtract Dates and Times in R</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>17 Apr 2021, 18:15</time>
+  </div>
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://localhost::4321/tags/dates">dates</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://localhost::4321/tags/times">times</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://localhost::4321/tags/baser">baseR</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  <h1 id="introduction">Introduction</h1>
+<p>Following the R recipe <a href="How-to-deal-with-Dates-and-Times-in-R.html">How to deal with Date and Time in
+R</a> where we reviewed the
+base R capabilities to deal with dates and times, we continue exploring
+how to add and subtract dates and times, also in base R. I plan to cover
+<a href="https://lubridate.tidyverse.org/"><strong>lubridate</strong></a> and
+<a href="https://clock.r-lib.org/"><strong>clock</strong></a> packages in the future.</p>
+<h2 id="addition-of-a-scalar-to-a-date">Addition of a scalar to a date</h2>
+<p>It’s very common that we need to calculate an end date for a process or
+service knowing only the starting date and the duration. For this, we
+need to add the number of <strong>days</strong> (scalar) to a date. Let’s take a
+look:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">start_point <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Sys.Date</span>()
+duration_days <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">365</span>                <span style="color:#75715e"># one year</span>
+start_point <span style="color:#f92672">+</span> duration_days         <span style="color:#75715e"># [1] &#34;2022-04-20&#34;, one year later</span>
+
+duration_days <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">15</span>                 <span style="color:#75715e"># 15 days</span>
+start_point <span style="color:#f92672">+</span> duration_days         <span style="color:#75715e"># [1] &#34;2021-05-05&#34;, 15 days later</span>
+
+duration_days <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">30</span>             <span style="color:#75715e"># 3 months (approx)</span>
+start_point <span style="color:#f92672">+</span> duration_days         <span style="color:#75715e"># [1] &#34;2021-07-19&#34;, 90 days later</span>
+
+duration_days <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">16</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">7</span>             <span style="color:#75715e"># 16 weeks</span>
+start_point <span style="color:#f92672">+</span> duration_days         <span style="color:#75715e"># [1] &#34;2021-08-10&#34;, 112 days later</span>
+
+<span style="color:#a6e22e">class</span>(start_point <span style="color:#f92672">+</span> duration_days)  <span style="color:#75715e"># [1] &#34;Date&#34;</span>
+</code></pre></div><p>As you have seen above, adding a scalar to date produces another date
+pointing at the future. If you want to add weeks, months, etc. you need
+to convert it to days first. That’s a bit tricky because three months
+aren’t exactly 90 days. The exact number of days to add depends on the
+actual months involved. This has to be pre-computed separately, I’m
+afraid.</p>
+<h3 id="using-a-sequence-of-dates-to-assist-in-the-calculation">Using a sequence of dates to assist in the calculation</h3>
+<p>There is a powerful feature in R that I personally like a lot. It’s the
+capability to create sequence of dates that respect the oddities of the
+human calendar: not all the months have 30 days and there exists leap
+years.</p>
+<p>Let’s assume we want to send a bill every 27th of every month during 12
+months starting on 27th of Feb 2020. The pre-computed dates are:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">seq</span>(<span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2020-02-27&#34;</span>), by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;month&#34;</span>, length.out <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>)
+<span style="color:#75715e">## [1] &#34;2020-02-27&#34; &#34;2020-03-27&#34; &#34;2020-04-27&#34; &#34;2020-05-27&#34; &#34;2020-06-27&#34; &#34;2020-07-27&#34;</span>
+<span style="color:#75715e">## [7] &#34;2020-08-27&#34; &#34;2020-09-27&#34; &#34;2020-10-27&#34; &#34;2020-11-27&#34; &#34;2020-12-27&#34; &#34;2021-01-27&#34;</span>
+</code></pre></div><p>The same works for the 1st of every month (or any other day) but not for
+the last day of the month!. See below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">seq</span>(<span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2020-01-01&#34;</span>), by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;month&#34;</span>, length.out <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>)
+<span style="color:#75715e">## [1] &#34;2020-01-01&#34; &#34;2020-02-01&#34; &#34;2020-03-01&#34; &#34;2020-04-01&#34; &#34;2020-05-01&#34; &#34;2020-06-01&#34;</span>
+<span style="color:#75715e">## [7] &#34;2020-07-01&#34; &#34;2020-08-01&#34; &#34;2020-09-01&#34; &#34;2020-10-01&#34; &#34;2020-11-01&#34; &#34;2020-12-01&#34;</span>
+
+<span style="color:#a6e22e">seq</span>(<span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2020-01-31&#34;</span>), by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;month&#34;</span>, length.out <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>)
+<span style="color:#75715e">## [1] &#34;2020-01-31&#34; &#34;2020-03-02&#34; &#34;2020-03-31&#34; &#34;2020-05-01&#34; &#34;2020-05-31&#34; &#34;2020-07-01&#34;</span>
+<span style="color:#75715e">## [7] &#34;2020-07-31&#34; &#34;2020-08-31&#34; &#34;2020-10-01&#34; &#34;2020-10-31&#34; &#34;2020-12-01&#34; &#34;2020-12-31&#34;)</span>
+</code></pre></div><p>In the last example, February doesn’t appear while March appears twice.
+Same for April, June… For the last day of the month, we need a bit
+trickier solution. Check the next section: how to calculate the last day
+of the month.</p>
+<p>To finish this chapter of sequencing dates, I want to add that we can
+also increment by days, weeks, quarters and years. We can even indicate
+the last date of the sequence instead of its length:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">seq</span>(<span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2020-01-18&#34;</span>), by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;days&#34;</span>, length.out <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+<span style="color:#75715e"># [1] &#34;2020-01-18&#34; &#34;2020-01-19&#34; &#34;2020-01-20&#34;</span>
+
+<span style="color:#a6e22e">seq</span>(to <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2020-01-22&#34;</span>), by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;weeks&#34;</span>, to <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2020-02-29&#34;</span>))
+<span style="color:#75715e"># [1] &#34;2020-01-22&#34; &#34;2020-01-29&#34; &#34;2020-02-05&#34; &#34;2020-02-12&#34; &#34;2020-02-19&#34; &#34;2020-02-26&#34;</span>
+
+<span style="color:#a6e22e">seq</span>(<span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2020-01-22&#34;</span>), by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;quarters&#34;</span>, to <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2020-10-29&#34;</span>))
+<span style="color:#75715e"># [1] &#34;2020-01-22&#34; &#34;2020-04-22&#34; &#34;2020-07-22&#34; &#34;2020-10-22&#34;</span>
+
+<span style="color:#a6e22e">seq</span>(<span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2020-01-22&#34;</span>), by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;years&#34;</span>, to <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2024-10-29&#34;</span>))
+<span style="color:#75715e"># [1] &#34;2020-01-22&#34; &#34;2021-01-22&#34; &#34;2022-01-22&#34; &#34;2023-01-22&#34; &#34;2024-01-22&#34;</span>
+</code></pre></div><h4 id="how-to-calculate-the-last-day-of-the-month">How to calculate the last day of the month</h4>
+<p>As I said at the beginning, I don’t want to make use of the ubiquitous
+lubridate package. So this is based on pure base R. I must say this is
+my own solution because I haven’t seen anything better/shorter so far.
+If you happen to know one, please let me know.</p>
+<ol>
+<li>We start generating a sequence of 365 days from 1st of Jan 2020. You
+can, of course, adjustn this to your own needs.</li>
+<li>Then, we create groups per month using <code>format()</code></li>
+<li>Finally, we extract only the 2nd column.</li>
+</ol>
+<p>Voila!!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">dates <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">seq</span>(<span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2020-01-01&#34;</span>), by <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;day&#34;</span>, length.out <span style="color:#f92672">=</span> <span style="color:#ae81ff">365</span>)
+<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">head</span>(dates), <span style="color:#a6e22e">tail</span>(dates))
+<span style="color:#75715e">## [1] &#34;2020-01-01&#34; &#34;2020-01-02&#34; &#34;2020-01-03&#34; &#34;2020-01-04&#34; &#34;2020-01-05&#34; &#34;2020-01-06&#34;</span>
+<span style="color:#75715e">## [7] &#34;2020-12-25&#34; &#34;2020-12-26&#34; &#34;2020-12-27&#34; &#34;2020-12-28&#34; &#34;2020-12-29&#34; &#34;2020-12-30&#34;</span>
+
+last_days <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">aggregate</span>(dates, by <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(<span style="color:#a6e22e">format</span>(dates, <span style="color:#e6db74">&#34;%Y-%m&#34;</span>)), FUN <span style="color:#f92672">=</span> max)
+last_days
+<span style="color:#75715e">##    Group.1          x</span>
+<span style="color:#75715e">## 1  2020-01 2020-01-31</span>
+<span style="color:#75715e">## 2  2020-02 2020-02-29</span>
+<span style="color:#75715e">## 3  2020-03 2020-03-31</span>
+<span style="color:#75715e">## 4  2020-04 2020-04-30</span>
+<span style="color:#75715e">## 5  2020-05 2020-05-31</span>
+<span style="color:#75715e">## 6  2020-06 2020-06-30</span>
+<span style="color:#75715e">## 7  2020-07 2020-07-31</span>
+<span style="color:#75715e">## 8  2020-08 2020-08-31</span>
+<span style="color:#75715e">## 9  2020-09 2020-09-30</span>
+<span style="color:#75715e">## 10 2020-10 2020-10-31</span>
+<span style="color:#75715e">## 11 2020-11 2020-11-30</span>
+<span style="color:#75715e">## 12 2020-12 2020-12-30</span>
+
+last_days[,<span style="color:#ae81ff">2</span>]
+<span style="color:#75715e">## [1] &#34;2020-01-31&#34; &#34;2020-02-29&#34; &#34;2020-03-31&#34; &#34;2020-04-30&#34; &#34;2020-05-31&#34; &#34;2020-06-30&#34;</span>
+<span style="color:#75715e">## [7] &#34;2020-07-31&#34; &#34;2020-08-31&#34; &#34;2020-09-30&#34; &#34;2020-10-31&#34; &#34;2020-11-30&#34; &#34;2020-12-30&#34;</span>
+</code></pre></div><p>Notice that I’ve chosen a date with a leap year on purpose to test the
+solution</p>
+<h2 id="subtracting-a-scalar-from-a-date">Subtracting a scalar from a date</h2>
+<p>Conversely, we can also subtract a number of days from a date.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2020-02-27&#34;</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">4</span>    <span style="color:#75715e"># [1] &#34;2020-02-23&#34;</span>
+<span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2020-03-01&#34;</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>    <span style="color:#75715e"># [1] &#34;2020-02-29&#34;  (leap year)</span>
+<span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2020-03-01&#34;</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">90</span>   <span style="color:#75715e"># [1] &#34;2019-12-02&#34;  (leap year and change in year)</span>
+</code></pre></div><p>Nevertheless, you cannot generate sequence of dates in reverse (or
+backwards). And it doesn’t make any sense on second thought.</p>
+<h2 id="subtracting-two-dates">Subtracting two dates</h2>
+<p>Here we work with two dates, not with a date and a scalar as before. But
+the result of that subtraction results in a scalar: the number of days
+they fall apart. See below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">date1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2021-02-21&#34;</span>)
+date2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2021-07-28&#34;</span>)
+
+date1 <span style="color:#f92672">-</span> date2          <span style="color:#75715e"># Time difference of -157 days</span>
+date2 <span style="color:#f92672">-</span> date1          <span style="color:#75715e"># Time difference of 157 days</span>
+
+x <span style="color:#f92672">&lt;-</span> date2 <span style="color:#f92672">-</span> date1
+<span style="color:#a6e22e">class</span>(x)               <span style="color:#75715e"># [1] &#34;difftime&#34;</span>
+<span style="color:#a6e22e">attributes</span>(x)
+<span style="color:#75715e">## $class</span>
+<span style="color:#75715e">## [1] &#34;difftime&#34;</span>
+<span style="color:#75715e">## </span>
+<span style="color:#75715e">## $units</span>
+<span style="color:#75715e">## [1] &#34;days&#34;</span>
+</code></pre></div><p>Notice that the number of days can be positive or negative depending on
+the position of the dates. Also, there is a new class: <code>difftime</code>. This
+class is used to measure the time interval, and its structure contains
+the value and its unit. So the unit can be changed. The documentation
+<code>?difftime</code> shows: “auto”, “secs”, “mins”, “hours”, “days” and “weeks”.</p>
+<p>R will choose the most suitable unit for the value, but we can change or
+overule it:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">x                       <span style="color:#75715e"># Time difference of 157 days</span>
+<span style="color:#a6e22e">units</span>(x)                <span style="color:#75715e"># [1] &#34;days&#34;</span>
+<span style="color:#a6e22e">units</span>(x) <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;hours&#34;</span>     
+<span style="color:#a6e22e">units</span>(x)                <span style="color:#75715e"># [1] &#34;hours&#34;</span>
+x                       <span style="color:#75715e"># Time difference of 3768 hours</span>
+
+<span style="color:#a6e22e">difftime</span>(date2, date1, units <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;weeks&#34;</span>)   <span style="color:#75715e"># Time difference of 22.42857 weeks</span>
+<span style="color:#a6e22e">difftime</span>(date2, date1, units <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hours&#34;</span>)   <span style="color:#75715e"># Time difference of 3768 hours</span>
+</code></pre></div><p>Finally, you may remove the complexity of the <code>difftime</code> class and
+convert it to a number via <code>as.numeric</code>, but it’ll be converted in the
+current units. If you want to change it you need to specify the <code>units</code>
+parameter. Check this out:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">x                       <span style="color:#75715e"># Time difference of 157 days</span>
+<span style="color:#a6e22e">as.numeric</span>(x)           <span style="color:#75715e"># 157</span>
+
+<span style="color:#a6e22e">units</span>(x) <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;hours&#34;</span>
+x                       <span style="color:#75715e"># Time difference of 3768 hours</span>
+<span style="color:#a6e22e">as.numeric</span>(x)           <span style="color:#75715e"># 3768</span>
+
+<span style="color:#a6e22e">as.numeric</span>(x, units <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;days&#34;</span>)   <span style="color:#75715e"># 157</span>
+<span style="color:#a6e22e">as.numeric</span>(x, units <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;weeks&#34;</span>)  <span style="color:#75715e"># 22.42857</span>
+</code></pre></div><p>And that’s all! If you’ve read up to here, you’ll feel much more
+comfortable dealing with dates and times in R as of now.</p>
+<p>I’d be very happy to hear from your. You can get in touch with me on:</p>
+<ul>
+<li>Twitter: <a href="https://twitter.com/jlarellanoh">@jlarellanoh</a></li>
+<li>Email: <a href="mailto:r.data.science.101@gmail.com">r.data.science.101@gmail.com</a></li>
+</ul>
+
+  
+  <h4><i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Share!</h4>
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2flocalhost%3a%3a4321%2fpost%2f2021-04-17-how-to-add-and-subtract-dates-and-times-in-r%2f" target="_blank" title="Share on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2flocalhost%3a%3a4321%2fpost%2f2021-04-17-how-to-add-and-subtract-dates-and-times-in-r%2f" target="_blank" title="Tweet"><i class="fab fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2flocalhost%3a%3a4321%2fpost%2f2021-04-17-how-to-add-and-subtract-dates-and-times-in-r%2f" target="_blank" title="Share on Google+"><i class="fab fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2flocalhost%3a%3a4321%2fpost%2f2021-04-17-how-to-add-and-subtract-dates-and-times-in-r%2f" target="_blank" title="Post to Tumblr"><i class="fab fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2flocalhost%3a%3a4321%2fpost%2f2021-04-17-how-to-add-and-subtract-dates-and-times-in-r%2f" target="_blank" title="Pin it"><i class="fab fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2flocalhost%3a%3a4321%2fpost%2f2021-04-17-how-to-add-and-subtract-dates-and-times-in-r%2f" target="_blank" title="Submit to Reddit"><i class="fab fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://localhost::4321/post/2021-04-15-how-to-deal-with-dates-and-times-in-r/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://localhost::4321/post/2021-04-15-how-to-deal-with-dates-and-times-in-r/">How to deal with Dates and Times in R</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
+</div>
+
+
+  
+  
+  
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'Your Disqus shortname';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://localhost::4321/js/ui.js"></script>
+<script src="https://localhost::4321/js/menus.js"></script>
+
+
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking ID', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="\/\/analytics.example.com\/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId',  2 ]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//analytics.example.com/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
+
+
+
+<script src="https://localhost::4321/js/math-code.js"></script>
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  
+
+
+</body>
+</html>
+

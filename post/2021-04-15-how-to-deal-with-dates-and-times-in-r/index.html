@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <title>How to deal with Dates and Times in R &middot; R Data Science 101</title>
+
+    
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://localhost::4321/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://localhost::4321/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://localhost::4321/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet" type="text/css">
+
+  
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/androidstudio.min.css">
+  <script async src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
+  
+  <script async src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="https://localhost::4321/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="https://localhost::4321/css/my.css">
+    
+  
+  
+    
+        <script src="https://localhost::4321/js/my.js"></script>
+    
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="https://localhost::4321/">R Data Science</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://localhost::4321/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://localhost::4321/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://localhost::4321/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/jlarellanoh" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/jlarellanoh" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2016. All rights reserved.</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>How to deal with Dates and Times in R</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>15 Apr 2021, 22:00</time>
+  </div>
+
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://localhost::4321/tags/dates">dates</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://localhost::4321/tags/times">times</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://localhost::4321/tags/baser">baseR</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  <h1 id="introduction">Introduction</h1>
+<p>A common need that exists in most of the programming languages is
+parsing strings into dates and converting dates into strings. Mastering
+this process is of vital importance for data analysts/data scientist
+because we get data from many different sources and countries where
+format changes, and for dates this is typically a headache. For
+instance, “31st of January of 2021” can be written as:</p>
+<ul>
+<li><strong>01/31/21</strong>: US format</li>
+<li><strong>January the 31, 2021</strong>: US format</li>
+<li><strong>31/01/21</strong>: typically European format</li>
+<li><strong>31.01.21</strong>: typically German format</li>
+<li><strong>31-01-21</strong>: typically English format</li>
+<li><strong>31/JAN/21</strong>: variation of English format</li>
+<li><strong>31 January 2021</strong>: variation of English format</li>
+</ul>
+<p>Conversely, in many occasions we have to extract specific parts of the
+date like day of week, calendar week, month name, day name, etc. or we
+need to produce a long string containing date parts embedded with text
+like in this example “today is Monday of week 23 (2021)”.</p>
+<p>In this recipe we are going to learn how we can do this transformations
+in <strong>base R</strong> (we will not cover
+<a href="https://lubridate.tidyverse.org/"><strong>lubridate</strong></a> nor the new kid on the
+block: <a href="https://clock.r-lib.org/"><strong>clock</strong></a></p>
+<h2 id="how-to-get-current-date-and-time">How to get current Date and Time</h2>
+<p>Base R comes with 2 main functions to report current data and time:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">Sys.Date</span>()          <span style="color:#75715e"># [1] &#34;2021-04-20&#34;</span>
+<span style="color:#a6e22e">Sys.time</span>()          <span style="color:#75715e"># [1] &#34;2021-04-20 10:44:18 CEST&#34;</span>
+
+<span style="color:#a6e22e">class</span>(<span style="color:#a6e22e">Sys.Date</span>())   <span style="color:#75715e"># [1] &#34;Date&#34;</span>
+<span style="color:#a6e22e">class</span>(<span style="color:#a6e22e">Sys.time</span>())   <span style="color:#75715e"># [1] &#34;POSIXct&#34; &#34;POSIXt&#34; </span>
+</code></pre></div><p>Notice the inconsistency in the case: <code>Date()</code> starts with uppercase
+while <code>time()</code> starts with lowercase.</p>
+<p><code>Sys.Date()</code> returns and object of the class <code>Date</code> with the current
+date in the current time zone. <code>Sys.time()</code> returns and object of class
+<code>POSIXct</code>. They can be formatted following below instructions. Both
+classes store the number of seconds since 01/01/1970, so their
+underlying data type is numeric (it’s a simple signed number). <code>POSIXct</code>
+has more precision as it stores hours, minutes seconds and timezones:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">t <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Sys.time</span>()    
+<span style="color:#a6e22e">typeof</span>(t)         <span style="color:#75715e"># [1] &#34;double&#34;</span>
+
+d <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Sys.Date</span>()    
+<span style="color:#a6e22e">typeof</span>(d)         <span style="color:#75715e"># [1] &#34;double&#34;</span>
+</code></pre></div><p>But, there is another data type or class for datetimes: <code>POSIXlt</code>. This
+class creates a named list with all the date and time components like
+day, minutes, seconds… etc. We’ll see this class a bit later.</p>
+<h2 id="how-to-parse-a-character-string-into-a-date">How to parse a Character String into a Date</h2>
+<h3 id="default-date-format">Default date format</h3>
+<p>A date is a data type or class that exists within R. When you need to
+write a date into a report, document, csv file, etc. you convert it into
+a string. Also, to enter a date into the R terminal you produce a string
+that has to be converted into an R date type.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">mydate_chr <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;2021-04-15&#34;</span>          <span style="color:#75715e"># we create a date as string</span>
+<span style="color:#a6e22e">class</span>(mydate_chr)                   <span style="color:#75715e"># [1] &#34;character&#34;</span>
+
+mydate_date <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.Date</span>(mydate_chr)  <span style="color:#75715e"># we convert it into a date with default format yyyy-mm-dd </span>
+<span style="color:#a6e22e">class</span>(mydate_date)                  <span style="color:#75715e"># [1] &#34;Date&#34;</span>
+</code></pre></div><p>Ok, we’ve cast a string into a date with default format, but what is the
+default format?. As per the documentation (<code>?as.Date()</code>), if we do not
+indicate any format then the parameter <code>tryFormats</code> comes into play,
+whose default value is <code>c(&quot;%Y-%m-%d&quot;, &quot;%Y/%m/%d&quot;)</code>. Let’s test it!!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2021/04/01&#34;</span>)    <span style="color:#75715e"># It works: [1] &#34;2021-04-01&#34;</span>
+<span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2021-04-01&#34;</span>)    <span style="color:#75715e"># It works: [1] &#34;2021-04-01&#34;</span>
+<span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2021.04.01&#34;</span>)    <span style="color:#75715e"># Error: character string is not in a standard unambiguous format</span>
+<span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;2021 04 01&#34;</span>)    <span style="color:#75715e"># Error: character string is not in a standard unambiguous format</span>
+</code></pre></div><p>We’ve just seen that the two default formats work but not the other two,
+as expected. We’ll try with a character vector as input with multiple
+formats:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># First attempt</span>
+mydates <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;2021/04/01&#34;</span>, <span style="color:#e6db74">&#34;2021/04/02&#34;</span>, <span style="color:#e6db74">&#34;2021-04-03&#34;</span>, <span style="color:#e6db74">&#34;2021.04.04&#34;</span>)  <span style="color:#75715e"># Format with slashes &#34;/&#34; wins</span>
+<span style="color:#a6e22e">as.Date</span>(mydates)           <span style="color:#75715e"># [1] &#34;2021-04-01&#34; &#34;2021-04-02&#34; NA           NA </span>
+
+<span style="color:#75715e"># Second attempt</span>
+mydates <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;2021-04-01&#34;</span>, <span style="color:#e6db74">&#34;2021/04/02&#34;</span>, <span style="color:#e6db74">&#34;2021-04-03&#34;</span>, <span style="color:#e6db74">&#34;2021.04.04&#34;</span>)  <span style="color:#75715e"># Format with dashes &#34;-&#34; wins</span>
+<span style="color:#a6e22e">as.Date</span>(mydates)           <span style="color:#75715e"># [1] &#34;2021-04-01&#34; NA           &#34;2021-04-03&#34; NA  </span>
+</code></pre></div><p>What’s happened here? <code>format()</code> tries all the patterns in <code>tryFormats</code>
+with the 1st element of the vector and when it finds one that works then
+uses this for the rest of the elements. Notice that in the second
+attempt I’ve only changed the first date and it changed the behavior of
+<code>as.Date()</code>.</p>
+<h3 id="customized-date-format">Customized date format</h3>
+<p>What if the default format is not convenient for us. Then, we use the
+<code>format</code> argument of the function <code>as.Date()</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">mydates <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;01/01/2021&#34;</span>, <span style="color:#e6db74">&#34;02/02/2021&#34;</span>)  <span style="color:#75715e"># Changed to dd/mm/yyyy</span>
+<span style="color:#a6e22e">as.Date</span>(mydates, format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%d/%m/%Y&#34;</span>)     <span style="color:#75715e"># Works: [1] &#34;2021-01-01&#34; &#34;2021-02-02&#34;</span>
+
+mydates <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;01/JAN/21&#34;</span>, <span style="color:#e6db74">&#34;02/JAN/21&#34;</span>)    <span style="color:#75715e"># Format with slashes wins &#34;/&#34;</span>
+<span style="color:#a6e22e">as.Date</span>(mydates, format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%d/%b/%y&#34;</span>)     <span style="color:#75715e"># Works: [1] &#34;2021-01-01&#34; &#34;2021-01-02&#34;</span>
+
+mydates <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Thu, 15 of April, 2021&#34;</span>)          <span style="color:#75715e"># Format with slashes wins &#34;/&#34;</span>
+<span style="color:#a6e22e">as.Date</span>(mydates, format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%a, %d of %B, %Y&#34;</span>)   <span style="color:#75715e"># Works: [1] &#34;2021-04-15&#34;</span>
+</code></pre></div><p>There are plenty of <em>conversion specifications</em> that you can query on
+the documentation of <code>strptime()</code> or
+<a href="https://rdrr.io/r/base/strptime.html">here</a>.</p>
+<h3 id="adding-time-and-timezones">Adding time and timezones</h3>
+<p>In order to parse a datetime string, we need the function <code>strptime()</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">strptime</span>(<span style="color:#e6db74">&#34;2021-02-15 12:05:59&#34;</span>
+         , format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%Y-%m-%d %H:%M:%S&#34;</span>)
+
+<span style="color:#a6e22e">strptime</span>(<span style="color:#e6db74">&#34;2021-02-15 12:05:59&#34;</span>
+         , format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%Y-%m-%d %T&#34;</span>)              <span style="color:#75715e"># %T = %H:%M:%S</span>
+
+<span style="color:#a6e22e">strptime</span>(<span style="color:#e6db74">&#34;2021-02-15 12:05:59 PM&#34;</span>
+         , format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%Y-%m-%d %I:%M:%S %p&#34;</span>)     <span style="color:#75715e"># %p = AM/PM</span>
+
+<span style="color:#a6e22e">strptime</span>(<span style="color:#e6db74">&#34;2021-02-15 12:05:59 PM +0350&#34;</span>
+         , format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%Y-%m-%d %I:%M:%S %p %z&#34;</span>)  <span style="color:#75715e"># %z = timezone</span>
+
+<span style="color:#a6e22e">strptime</span>(<span style="color:#e6db74">&#34;2021-02-15 12:05:59 PM -0600&#34;</span>
+         , format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%Y-%m-%d %I:%M:%S %p %z&#34;</span>)  <span style="color:#75715e"># %z = timezone</span>
+</code></pre></div><p>As we said at the beginning, there is a class called <code>POSIXlt</code> that
+stores a date and time in a name list. See below&quot;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">strptime</span>(<span style="color:#e6db74">&#34;2021-02-15 12:05:59&#34;</span>
+              , format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%Y-%m-%d %H:%M:%S&#34;</span>)
+<span style="color:#a6e22e">class</span>(x)     <span style="color:#75715e"># [1] &#34;POSIXlt&#34; &#34;POSIXt&#34;</span>
+<span style="color:#a6e22e">typeof</span>(x)    <span style="color:#75715e"># list</span>
+</code></pre></div><p>As we see, <code>strptime()</code> constructs a <code>POSIXlt</code> object. We can extract
+its components individually:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">x<span style="color:#f92672">$</span>sec     <span style="color:#75715e"># 59</span>
+x<span style="color:#f92672">$</span>min     <span style="color:#75715e"># 5</span>
+x<span style="color:#f92672">$</span>hour    <span style="color:#75715e"># 12</span>
+x<span style="color:#f92672">$</span>mday    <span style="color:#75715e"># 15</span>
+x<span style="color:#f92672">$</span>mon     <span style="color:#75715e"># 1   (it goes from 0 to 11: do 1+x$mon)</span>
+x<span style="color:#f92672">$</span>year    <span style="color:#75715e"># 121 (years from 1900: do 1900+x$year)</span>
+x<span style="color:#f92672">$</span>wday    <span style="color:#75715e"># 1   (day of week 0-6 -Sun to Sat-)</span>
+x<span style="color:#f92672">$</span>yday    <span style="color:#75715e"># 45  (day of year 0-364 -or 365 in a leap year-)</span>
+x<span style="color:#f92672">$</span>isdst   <span style="color:#75715e"># 0   (daylight savings: 0 not in place)</span>
+x<span style="color:#f92672">$</span>zone    <span style="color:#75715e"># CET (Central European Time)</span>
+x<span style="color:#f92672">$</span>gmtoff  <span style="color:#75715e"># The offset in seconds from GMT. NA is unknown</span>
+</code></pre></div><p>A <code>POSIXlt</code> it’s a bit more complex class than a <code>POSIXct</code> but it stores
+time in a human-like way.</p>
+<h2 id="how-to-convert-dates-into-strings">How to convert Dates into Strings</h2>
+<h3 id="extracting-parts-of-dates">Extracting parts of Dates</h3>
+<p>Here we can use the function <code>format()</code>. Let say, we want to know the
+week number of Joe’s birthday, we can do:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Joe_bday <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.Date</span>(<span style="color:#e6db74">&#34;1975/03/28&#34;</span>)
+<span style="color:#a6e22e">format</span>(Joe_bday, format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Week was %V&#34;</span>)    <span style="color:#75715e"># [1] &#34;Week was 13&#34;</span>
+</code></pre></div><p>We can also check other date elements, like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">format</span>(Joe_bday, format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;That day it was %A (%a)&#34;</span>)        <span style="color:#75715e"># [1] &#34;That day it was Friday (Fri)&#34;</span>
+<span style="color:#a6e22e">format</span>(Joe_bday, format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;It was the day %u of the week&#34;</span>)  <span style="color:#75715e"># [1] &#34;It was the day 3rd of the week 5&#34;</span>
+<span style="color:#a6e22e">format</span>(Joe_bday, format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;It was %Cth century&#34;</span>)            <span style="color:#75715e"># [1] &#34;It was 19th century (really ??)&#34;</span>
+</code></pre></div><p>As can you see, %C doesn’t calculate the century correctly. It’s defined
+in the documentation as “Century (00–99): the integer part of the year
+divided by 100”. So you must add 1. I warned you!</p>
+<p>Additionally, there is a set of methods to assist on this matter,
+namely:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">weekdays</span>(Joe_bday)                      <span style="color:#75715e"># [1] &#34;Friday&#34;</span>
+<span style="color:#a6e22e">weekdays</span>(Joe_bday, abbreviate <span style="color:#f92672">=</span> T)      <span style="color:#75715e"># [1] &#34;Fri&#34;</span>
+
+<span style="color:#a6e22e">months</span>(Joe_bday)                        <span style="color:#75715e"># [1] &#34;March&#34;</span>
+<span style="color:#a6e22e">months</span>(Joe_bday, abbreviate <span style="color:#f92672">=</span> T)        <span style="color:#75715e"># [1] &#34;Mar&#34;</span>
+
+<span style="color:#a6e22e">quarters</span>(Joe_bday)                      <span style="color:#75715e"># [1] &#34;Q1&#34; </span>
+
+<span style="color:#a6e22e">julian</span>(Joe_bday)                        <span style="color:#75715e"># [1] &#34;1970-01-01&#34;  (number of days since 1970-01-01)</span>
+</code></pre></div><h2 id="how-to-extract-parts-of-times">How to extract parts of Times</h2>
+<p>If you’ve reached this point, the rest it’s going to be a piece of cake
+for you:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Joe_bday <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">strptime</span>(<span style="color:#e6db74">&#34;1975-03-28 06:01:21 PM +0600&#34;</span>
+                    , format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%Y-%m-%d %I:%M:%S %p %z&#34;</span>)
+
+<span style="color:#a6e22e">format</span>(Joe_bday, format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hour: %H or %I %p&#34;</span>)     <span style="color:#75715e"># [1] &#34;Hour: 13 or 01 PM&#34; </span>
+<span style="color:#a6e22e">format</span>(Joe_bday, format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Minute: %M&#34;</span>)            <span style="color:#75715e"># [1] &#34;Minute: 01&#34;</span>
+<span style="color:#a6e22e">format</span>(Joe_bday, format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Second: %S&#34;</span>)            <span style="color:#75715e"># [1] &#34;Second: 21&#34;</span>
+<span style="color:#a6e22e">format</span>(Joe_bday, format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Timezone: %z&#34;</span>)          <span style="color:#75715e"># [1] &#34;Timezone: +0600&#34;</span>
+</code></pre></div><p>And that’s all! If you’ve read up to here, you’ll feel much more
+comfortable dealing with dates and times in R. We haven’t seen how to
+operate with them (addition and subtraction of 2 dates). <a href="How-to-add-and-subtract-Dates-and-Times-in-R.html">This will be
+another R recipe</a>.</p>
+<p>I’d be very happy to hear from your. You can get in touch with me on:</p>
+<ul>
+<li>Twitter: <a href="https://twitter.com/jlarellanoh">@jlarellanoh</a></li>
+<li>Email: <a href="mailto:r.data.science.101@gmail.com">r.data.science.101@gmail.com</a></li>
+</ul>
+
+  
+  <h4><i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Share!</h4>
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2flocalhost%3a%3a4321%2fpost%2f2021-04-15-how-to-deal-with-dates-and-times-in-r%2f" target="_blank" title="Share on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2flocalhost%3a%3a4321%2fpost%2f2021-04-15-how-to-deal-with-dates-and-times-in-r%2f" target="_blank" title="Tweet"><i class="fab fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2flocalhost%3a%3a4321%2fpost%2f2021-04-15-how-to-deal-with-dates-and-times-in-r%2f" target="_blank" title="Share on Google+"><i class="fab fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2flocalhost%3a%3a4321%2fpost%2f2021-04-15-how-to-deal-with-dates-and-times-in-r%2f" target="_blank" title="Post to Tumblr"><i class="fab fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2flocalhost%3a%3a4321%2fpost%2f2021-04-15-how-to-deal-with-dates-and-times-in-r%2f" target="_blank" title="Pin it"><i class="fab fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2flocalhost%3a%3a4321%2fpost%2f2021-04-15-how-to-deal-with-dates-and-times-in-r%2f" target="_blank" title="Submit to Reddit"><i class="fab fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://localhost::4321/post/2021-04-17-how-to-add-and-subtract-dates-and-times-in-r/">How to add and subtract Dates and Times in R</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://localhost::4321/post/2021-04-17-how-to-add-and-subtract-dates-and-times-in-r/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+  
+  
+  
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'Your Disqus shortname';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+
+</div>
+
+</div>
+</div>
+<script src="https://localhost::4321/js/ui.js"></script>
+<script src="https://localhost::4321/js/menus.js"></script>
+
+
+
+
+<script>
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'Your Google Analytics tracking ID', 'auto');
+    ga('send', 'pageview');
+  }
+</script>
+
+
+
+
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="\/\/analytics.example.com\/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId',  2 ]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//analytics.example.com/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
+
+
+
+<script src="https://localhost::4321/js/math-code.js"></script>
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  
+
+
+</body>
+</html>
+
