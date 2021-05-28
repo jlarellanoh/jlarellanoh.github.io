@@ -2,27 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R Data Science 101</title>
-    <link>https://localhost::4321/</link>
+    <link>https://jlarellanoh.github.io/</link>
     <description>Recent content on R Data Science 101</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&amp;copy; 2016. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 17 Apr 2021 18:15:53 +0000</lastBuildDate><atom:link href="https://localhost::4321/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Apr 2021 18:15:53 +0000</lastBuildDate><atom:link href="https://jlarellanoh.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>https://jlarellanoh.github.io/about/</link>
+      <pubDate>Thu, 27 May 2021 21:48:51 +0000</pubDate>
+      
+      <guid>https://jlarellanoh.github.io/about/</guid>
+      <description>Welcome to R Data Science 101 About me My name Juan Lorenzo Arellano and I have extensive experience with technology, data bases, virtualization, storage and mission critical services. Nevertheless, I am kind of new in the Data Science domain but I got captivated by its essence and power.
+I started learning R in 2019 and after the initial hurdles of learning anything for first time, I very rapidly managed to analyze technical datasets that had financial implications at work, that allowed me to get powerful insights we didn&amp;rsquo;t get before with traditional methods and tools like Excel.</description>
+    </item>
+    
     <item>
       <title>How to add and subtract Dates and Times in R</title>
-      <link>https://localhost::4321/post/2021-04-17-how-to-add-and-subtract-dates-and-times-in-r/</link>
+      <link>https://jlarellanoh.github.io/post/2021-04-17-how-to-add-and-subtract-dates-and-times-in-r/</link>
       <pubDate>Sat, 17 Apr 2021 18:15:53 +0000</pubDate>
       
-      <guid>https://localhost::4321/post/2021-04-17-how-to-add-and-subtract-dates-and-times-in-r/</guid>
+      <guid>https://jlarellanoh.github.io/post/2021-04-17-how-to-add-and-subtract-dates-and-times-in-r/</guid>
       <description>Introduction Following the R recipe How to deal with Date and Time in R where we reviewed the base R capabilities to deal with dates and times, we continue exploring how to add and subtract dates and times, also in base R. I plan to cover lubridate and clock packages in the future.
 Addition of a scalar to a date It’s very common that we need to calculate an end date for a process or service knowing only the starting date and the duration.</description>
     </item>
     
     <item>
       <title>How to deal with Dates and Times in R</title>
-      <link>https://localhost::4321/post/2021-04-15-how-to-deal-with-dates-and-times-in-r/</link>
+      <link>https://jlarellanoh.github.io/post/2021-04-15-how-to-deal-with-dates-and-times-in-r/</link>
       <pubDate>Thu, 15 Apr 2021 22:00:00 +0000</pubDate>
       
-      <guid>https://localhost::4321/post/2021-04-15-how-to-deal-with-dates-and-times-in-r/</guid>
+      <guid>https://jlarellanoh.github.io/post/2021-04-15-how-to-deal-with-dates-and-times-in-r/</guid>
       <description>Introduction A common need that exists in most of the programming languages is parsing strings into dates and converting dates into strings. Mastering this process is of vital importance for data analysts/data scientist because we get data from many different sources and countries where format changes, and for dates this is typically a headache. For instance, “31st of January of 2021” can be written as:
  01/31/21: US format January the 31, 2021: US format 31/01/21: typically European format 31.</description>
     </item>

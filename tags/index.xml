@@ -2,35 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on R Data Science 101</title>
-    <link>https://localhost::4321/tags/</link>
+    <link>https://jlarellanoh.github.io/tags/</link>
     <description>Recent content in Tags on R Data Science 101</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>&amp;copy; 2016. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 17 Apr 2021 18:15:53 +0000</lastBuildDate><atom:link href="https://localhost::4321/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Apr 2021 18:15:53 +0000</lastBuildDate><atom:link href="https://jlarellanoh.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>baseR</title>
-      <link>https://localhost::4321/tags/baser/</link>
+      <link>https://jlarellanoh.github.io/tags/baser/</link>
       <pubDate>Sat, 17 Apr 2021 18:15:53 +0000</pubDate>
       
-      <guid>https://localhost::4321/tags/baser/</guid>
+      <guid>https://jlarellanoh.github.io/tags/baser/</guid>
       <description></description>
     </item>
     
     <item>
       <title>dates</title>
-      <link>https://localhost::4321/tags/dates/</link>
+      <link>https://jlarellanoh.github.io/tags/dates/</link>
       <pubDate>Sat, 17 Apr 2021 18:15:53 +0000</pubDate>
       
-      <guid>https://localhost::4321/tags/dates/</guid>
+      <guid>https://jlarellanoh.github.io/tags/dates/</guid>
       <description></description>
     </item>
     
     <item>
       <title>times</title>
-      <link>https://localhost::4321/tags/times/</link>
+      <link>https://jlarellanoh.github.io/tags/times/</link>
       <pubDate>Sat, 17 Apr 2021 18:15:53 +0000</pubDate>
       
-      <guid>https://localhost::4321/tags/times/</guid>
+      <guid>https://jlarellanoh.github.io/tags/times/</guid>
       <description></description>
     </item>
     
